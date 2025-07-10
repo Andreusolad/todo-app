@@ -8,14 +8,15 @@ add_button = sg.Button("Add")
 
 list_box = sg.Listbox(values=functions.get_todos(), key='todos',
                       enable_events=True, size=[45, 10])
+
 edit_button = sg.Button("Edit")
+complete_button = sg.Button("Complete")
+exit_button = sg.Button("Exit")
 
-
-
-window = sg.Window('My To_Do App',
-                   layout=[[label], [input_box, add_button],
-                    [list_box, edit_button ]],
-                   font=('Helvetica',15)) #title of the window and layout
+layout=[[label], [input_box, add_button],
+        [list_box, edit_button, complete_button],
+        [exit_button]]
+window = sg.Window('My To_Do App', layout=layout, font=('Helvetica',15)) #title of the window and layout
 #fiquem doble [[ ]] perquè si està dins de dos brackets fica la box al costat del label
 
 
@@ -41,13 +42,25 @@ while True:
             todos[index] = new_todo
             functions.write_todos(todos)
             window['todos'].update(values=todos)
+            window['todo'].update(value="")
+
+        case "Complete":
+            todo_to_complete = values['todos'][0]
+            todos = functions.get_todos()
+            todos.remove(todo_to_complete)
+            functions.write_todos(todos)
+            window['todos'].update(values=todos)
+
+        case "Exit":
+            break
+
 
         case 'todos':
             window['todo'].update(value=values['todos'][0])
         case sg.WIN_CLOSED:
-            break
+            break #fem servir break i no exit perquè exit() atura tot el programa directament
 
 
 
-
+print("Bye")
 window.close()
