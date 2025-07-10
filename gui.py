@@ -2,16 +2,22 @@
 import functions
 import FreeSimpleGUI as sg
 import time
+import os
 
-sg.theme("LightBlue6")
+
+if not os.path.exists("todos.txt"):
+    with open("todos.txt", 'w') as file:
+        pass
+#això crea un .txt file anomenat todos.txt
+
+sg.theme("Black")
 
 clock = sg.Text('', key='clock')
 label = sg.Text("Type in a to-do") #creats a label on window, has to be a string
 input_box = sg.InputText(tooltip="Enter todo", key="todo") #és el lloc on escrivim, tooltip és el missatge que surt si passem el cursor per sobre
 add_button = sg.Button("Add")
 
-list_box = sg.Listbox(values=functions.get_todos(), key='todos',
-                      enable_events=True, size=[45, 10])
+list_box = sg.Listbox(values=functions.get_todos(), key='todos', enable_events=True, size=[45, 10])
 
 edit_button = sg.Button("Edit")
 complete_button = sg.Button("Complete")
