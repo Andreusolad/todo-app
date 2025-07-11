@@ -1,7 +1,7 @@
 Fix the code
 Clean the car
 Throw the trash
-Make pizza
-Make sushi
 Help the neighbour
-Get paper
+Make sushi
+Make pizza
+
